@@ -1,0 +1,22 @@
+spectator:
+  applicationName: ${spring.application.name}
+  webEndpoint:
+    enabled: false
+
+server:
+  ssl:
+    enabled: false
+  port: '8084'
+  address: 0.0.0.0
+
+cors:
+  allowedOriginsPattern: http://www.313.co.kr:9000
+
+# halconfig
+
+redis:
+  connection: ${services.redis.baseUrl:redis://localhost:6379}
+
+logging:
+  level:
+    root: DEBUG

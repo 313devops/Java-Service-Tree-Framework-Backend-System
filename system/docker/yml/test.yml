@@ -1,0 +1,77 @@
+version: '3.6'
+
+#sudo adduser spinnaker --disabled-password
+#sudo usermod -aG sudo spinnaker
+
+services:
+
+#  fluentd:
+#    image: 313devgrp/fluentd:v1.14.0-debian-1.0-v4
+#    ports:
+#      - 24224:24224
+#      - 24224:24224/udp
+#    configs:
+#      - source: fluentd.conf
+#        target: /fluentd/etc/fluent.conf
+#    volumes: &app-volumes
+#      - /etc/timezone:/etc/timezone:ro
+#      - /etc/localtime:/etc/localtime:ro    
+#    extra_hosts: &app-addhost
+#      - "313.co.kr:192.168.25.46"
+#      - "db.313.co.kr:192.168.25.40"
+#      - "nas.313.co.kr:192.168.25.42"
+#      - "www.313.co.kr:192.168.25.42"
+#      - "ubuntu.313.co.kr:192.168.25.46"
+#    deploy: &app-deploy
+#      mode: replicated
+#      replicas: 1
+#    networks: &app-network
+#      - appnetwork
+#    logging: &app-logging
+#      driver: "json-file"
+#      options:
+#        max-file: "5"
+#        max-size: "100m"
+
+  www313cork:
+    image: tomcat:8.5.73-jre8
+    ports:
+      - 32323:8080
+    environment:
+      - "SPRING_PROFILES_ACTIVE=live"
+    volumes:
+      - tomcat_data:/usr/local/tomcat/webapps
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    extra_hosts: &app-addhost
+      - "313.co.kr:192.168.25.46"
+      - "db.313.co.kr:192.168.25.40"
+      - "nas.313.co.kr:192.168.25.42"
+      - "www.313.co.kr:192.168.25.42"
+      - "ubuntu.313.co.kr:192.168.25.46"
+    deploy: &app-deploy
+      mode: replicated
+      replicas: 1
+    networks: &app-network
+      - appnetwork
+    logging: &app-logging
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
+
+#configs:
+#  fluentd.conf:
+#    file: ./allinone/fluent.conf
+
+volumes:
+  tomcat_data:
+    driver: local
+    driver_opts:
+      type: "nfs"
+      o: "addr=${NFSSERVER:-1.2.3.4},nolock,soft,rw,sync"
+      device: ":${NFSPATH:-/nfspath}/test"
+
+networks:
+  appnetwork:
+    attachable: true

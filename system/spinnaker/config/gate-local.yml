@@ -1,0 +1,31 @@
+server:
+  tomcat:
+    protocolHeader: X-Forwarded-Proto
+    remoteIpHeader: X-Forwarded-For
+    internalProxies: .*
+    httpsServerPort: X-Forwarded-Port
+
+security:
+  basic:
+    enabled: false
+  user: {}
+  oauth2:
+    enabled: true
+    client:
+      clientId: spinnaker
+      clientSecret: 69b28ebd-4d41-4565-b7c0-674fb0474252
+      userAuthorizationUri: http://www.313.co.kr:8585/auth/realms/devops/protocol/openid-connect/auth
+      accessTokenUri: http://www.313.co.kr:8585/auth/realms/devops/protocol/openid-connect/token
+    resource:
+      userInfoUri: http://www.313.co.kr:8585/auth/realms/devops/protocol/openid-connect/userinfo
+    userInfoMapping:
+      email: email
+      firstName: given_name
+      lastName: family_name
+      username: preferred_username
+    provider: oauth2
+
+services:
+  fiat:
+    baseUrl: "http://fiat-nginx:7777"
+    enabled: true
