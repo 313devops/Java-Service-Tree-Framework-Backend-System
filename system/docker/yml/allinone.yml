@@ -482,7 +482,7 @@ services:
     logging: *allinone-logging
 
   fluentd:
-    image: 313devgrp/fluentd:v1.14.0-debian-1.0-v4
+    image: 313devgrp/fluentd-elastic-kafka:v1.9.1-debian-1.0.1
     ports:
       - 24224:24224
       - 24224:24224/udp

@@ -390,18 +390,18 @@ apm-server:
 # Configure what output to use when sending the data collected by the beat.
 
 #-------------------------- Elasticsearch output ------------------------------
-#output.elasticsearch:
+output.elasticsearch:
   # Array of hosts to connect to.
   # Scheme and port can be left out and will be set to the default (http and 9200)
   # In case you specify and additional path, the scheme is required: http://localhost:9200/path
   # IPv6 addresses should always be defined as: https://[2001:db8::1]:9200
-  #hosts: ["es-coordinating:9200"]
+  hosts: ["es-coordinating:9200"]
 
   # Boolean flag to enable or disable the output module.
-  #enabled: true
+  enabled: true
 
   # Set gzip compression level.
-  #compression_level: 0
+  compression_level: 0
 
   # Optional protocol and basic auth credentials.
   #protocol: "https"
@@ -640,18 +640,18 @@ apm-server:
   #ssl.renegotiation: never
 
 #------------------------------- Kafka output ----------------------------------
-output.kafka:
+#output.kafka:
   # Boolean flag to enable or disable the output module.
-  enabled: true
+  #enabled: true
 
   # The list of Kafka broker addresses from where to fetch the cluster metadata.
   # The cluster metadata contain the actual Kafka brokers events are published
   # to.
-  hosts: ["kafka1:9092","kafka2:9092","kafka3:9092"]
+  #hosts: ["kafka1:9092","kafka2:9092","kafka3:9092"]
 
   # The Kafka topic used for produced events. The setting can be a format string
   # using any event field. To set the topic from document type use `%{[type]}`.
-  topic: msgTopic
+  #topic: msgTopic
 
   # The Kafka event key setting. Use format string to create unique event key.
   # By default no event key will be generated.
@@ -747,7 +747,7 @@ output.kafka:
   #client_id: beats
 
   # Enable SSL support. SSL is automatically enabled, if any SSL setting is set.
-  ssl.enabled: false
+  #ssl.enabled: false
 
   # Optional SSL configuration options. SSL is off by default.
   # List of root certificates for HTTPS server verifications
