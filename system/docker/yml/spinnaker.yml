@@ -1,8 +1,5 @@
 version: '3.6'
 
-#sudo adduser spinnaker --disabled-password
-#sudo usermod -aG sudo spinnaker
-
 services:
 
   halyard:
@@ -10,7 +7,7 @@ services:
     ports:
       - 8064:8064
     volumes:
-      - halyardVolume:/home/spinnaker/.hal
+      - halyardVolume:/home/spinnaker/.hal:nocopy
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     deploy: &spinnaker-deploy
@@ -38,7 +35,7 @@ services:
       - "www.313.co.kr:192.168.25.42"
       - "ubuntu.313.co.kr:192.168.25.46"
     volumes: &configSpinnakerVolume
-      - config-spinnaker-volume:/opt/spinnaker/config
+      - config-spinnaker-volume:/opt/spinnaker/config:nocopy
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     deploy: *spinnaker-deploy
@@ -52,8 +49,8 @@ services:
       - 9000:9000
     extra_hosts: *addHost
     volumes:
-      - config-spinnaker-volume:/opt/spinnaker/config
-      - deck-html-volume:/opt/deck/html
+      - config-spinnaker-volume:/opt/spinnaker/config:nocopy
+      - deck-html-volume:/opt/deck/html:nocopy
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     deploy: *spinnaker-deploy
@@ -184,7 +181,7 @@ services:
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-      - redis-conf:/usr/local/etc/redis
+      - redis-conf:/usr/local/etc/redis:nocopy
       - /nfs/spinnaker/redis-data:/data
     ports:
       - 6379:6379
@@ -217,8 +214,8 @@ services:
       #ap-northeast-2
       - MINIO_REGION=us-east-1
     volumes:
-      - minio-config-volume:/etc/minio
-      - minio-data-volume:/data
+      - minio-config-volume:/etc/minio:nocopy
+      - minio-data-volume:/data:nocopy
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:

@@ -7,8 +7,8 @@ services:
     ports:
       - "8095:8095"
     environment:
-      - JVM_MINIMUM_MEMORY=2g
-      - JVM_MAXIMUM_MEMORY=2g
+      - JVM_MINIMUM_MEMORY=1g
+      - JVM_MAXIMUM_MEMORY=1g
       #- ATL_PROXY_NAME=www.313.co.kr
       #- ATL_PROXY_PORT=8094
       #- ATL_TOMCAT_SCHEME=http
@@ -19,8 +19,8 @@ services:
       - "www.313.co.kr:192.168.25.42"
       - "ubuntu.313.co.kr:192.168.25.46"
     volumes:
-      - crowdApp:/var/atlassian/application-data/crowd
-      - crowdLib:/opt/atlassian/crowd/apache-tomcat/lib
+      - crowdApp:/var/atlassian/application-data/crowd:nocopy
+      - crowdLib:/opt/atlassian/crowd/apache-tomcat/lib:nocopy
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     depends_on:
@@ -67,8 +67,8 @@ services:
       - mysql
       - crowd
     volumes:
-      - keycloak:/opt/jboss/keycloak/standalone/deployments
-      - keycloakThemes:/opt/jboss/keycloak/themes
+      - keycloak:/opt/jboss/keycloak/standalone/deployments:nocopy
+      - keycloakThemes:/opt/jboss/keycloak/themes:nocopy
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     deploy: *auth-deploy
@@ -168,7 +168,7 @@ services:
       --binlog-ignore-db=sys
       --log_slave_updates=1
     volumes:
-      - mysql:/data
+      - mysql:/data:nocopy
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     deploy: *auth-deploy

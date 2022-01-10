@@ -33,7 +33,7 @@ services:
       - "9009:9000"
       - "8008:8000"
     volumes:
-      - portainer_data:/data
+      - portainer_data:/data:nocopy
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
